@@ -28,7 +28,7 @@ jobs:
     - name: Debug
        uses: actions/checkout@v1
        run: |
-      echo "Debugging"
+      echo "Debugging "
       tree
 
     - name: jacoco-badge-generator
