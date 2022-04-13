@@ -26,6 +26,7 @@ jobs:
       run: mvn -B package --file pandas/pom.xml
 
     - name: Debug
+      - uses: actions/checkout@v1
       - run: echo "Debug"
       - run: tree
 
