@@ -45,36 +45,12 @@ jobs:
         generate-coverage-badge: true # optional, default is true
         # Controls whether or not to generate the branches coverage badge.
         generate-branches-badge: true # optional
-        # Text for the left-side of the coverage badge.
-        coverage-label: coverage # optional, default is coverage
-        # Text for the left-side of the branches coverage badge.
-        branches-label: branches # optional, default is branches
         # Controls what happens if one or more jacoco.csv files do not exist.
         on-missing-report: fail # optional, default is fail
         # Enables failing workflow run when coverage below specified threshold.
         fail-if-coverage-less-than: 0 # optional, default is 0
         # Enables failing workflow run when branches coverage below specified threshold.
         fail-if-branches-less-than: 0 # optional, default is 0
-        # Enables failing workflow if coverage is less than it was on previous run.
-        fail-on-coverage-decrease: # optional
-        # Enables failing workflow if branches coverage is less than it was on previous run.
-        fail-on-branches-decrease: # optional
-        # List of coverage percentages as cutoffs for each color.
-        intervals: 100 90 80 70 60 0 # optional, default is 100 90 80 70 60 0
-        # List of colors to use ordered by coverage interval, best coverage to worst.
-        colors: #4c1 #97ca00 #a4a61d #dfb317 #fe7d37 #e05d44 # optional, default is #4c1 #97ca00 #a4a61d #dfb317 #fe7d37 #e05d44
-        # Controls whether or not to generate the coverage JSON endpoint.
-        generate-coverage-endpoint: # optional
-        # Controls whether or not to generate the branches coverage JSON endpoint.
-        generate-branches-endpoint: # optional
-        # The filename of the coverage JSON endpoint.
-        coverage-endpoint-filename: # optional, default is jacoco.json
-        # The filename of the branches coverage JSON endpoint.
-        branches-endpoint-filename: # optional, default is branches.json
-        # Controls whether or not to generate a JSON file containing the coverage percentages as floating-point values.
-        generate-summary: # optional
-        # The filename of the summary file.
-        summary-filename: # optional, default is coverage-summary.json
 
     - name: Log integration test outputs with a single jacoco.csv
       run: |
