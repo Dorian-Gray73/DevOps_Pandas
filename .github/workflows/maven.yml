@@ -28,6 +28,7 @@ jobs:
 
 
     - name: jacoco-badge-generator
+      id: integration1
       # You may pin to the exact commit or the version.
       # uses: cicirello/jacoco-badge-generator@bce93b1f42572a20200386583e26fe0c397c0944
       uses: cicirello/jacoco-badge-generator@v2.6.1
@@ -43,7 +44,7 @@ jobs:
         # Controls whether or not to generate the coverage badge.
         generate-coverage-badge: true # optional, default is true
         # Controls whether or not to generate the branches coverage badge.
-        generate-branches-badge: # optional
+        generate-branches-badge: true # optional
         # Text for the left-side of the coverage badge.
         coverage-label: coverage # optional, default is coverage
         # Text for the left-side of the branches coverage badge.
@@ -74,8 +75,8 @@ jobs:
         generate-summary: # optional
         # The filename of the summary file.
         summary-filename: coverage-summary.json # optional, default is coverage-summary.json
-        
-    - name: Debug
-      run: | 
-        echo "Debugging"
-        tree
+
+    - name: Log integration test outputs with a single jacoco.csv
+      run: |
+        echo "coverage = ${{ steps.integration1.outputs.coverage }}"
+        echo "branch coverage = ${{ steps.integration1.outputs.branches }}"
