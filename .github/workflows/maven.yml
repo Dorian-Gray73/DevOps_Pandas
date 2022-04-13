@@ -68,13 +68,13 @@ jobs:
         # Controls whether or not to generate the branches coverage JSON endpoint.
         generate-branches-endpoint: # optional
         # The filename of the coverage JSON endpoint.
-        coverage-endpoint-filename: jacoco.json # optional, default is jacoco.json
+        coverage-endpoint-filename: # optional, default is jacoco.json
         # The filename of the branches coverage JSON endpoint.
-        branches-endpoint-filename: branches.json # optional, default is branches.json
+        branches-endpoint-filename: # optional, default is branches.json
         # Controls whether or not to generate a JSON file containing the coverage percentages as floating-point values.
         generate-summary: # optional
         # The filename of the summary file.
-        summary-filename: coverage-summary.json # optional, default is coverage-summary.json
+        summary-filename: # optional, default is coverage-summary.json
 
     - name: Log integration test outputs with a single jacoco.csv
       run: |
