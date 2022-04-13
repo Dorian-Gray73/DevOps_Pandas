@@ -27,7 +27,9 @@ jobs:
       run: mvn -B package --file pandas/pom.xml
 
     - name: Debug
-      run: echo "Debugging"
+      run: | 
+        echo "Debugging"
+        tree
 
     - name: jacoco-badge-generator
       # You may pin to the exact commit or the version.
