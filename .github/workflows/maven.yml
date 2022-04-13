@@ -37,7 +37,7 @@ jobs:
       uses: cicirello/jacoco-badge-generator@v2.6.1
       with:
         # Full path, relative to the root of the repository, to the jacoco csv file(s), including filename(s)
-        jacoco-csv-file: target/site/jacoco-ut/jacoco.csv # optional, default is target/site/jacoco/jacoco.csv
+        jacoco-csv-file: pandas/target/site/jacoco-ut/jacoco.csv # optional, default is target/site/jacoco/jacoco.csv
         # The directory for storing badges, relative to the root of the repository.
         badges-directory: .github/badges # optional, default is .github/badges
         # The filename of the coverage badge.
