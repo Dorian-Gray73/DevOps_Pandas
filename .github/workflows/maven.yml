@@ -26,6 +26,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pandas/pom.xml
 
+    - name: Steup badges directory
+      run: mkdir -p .github/badges
 
     - name: jacoco-badge-generator
       id: integration1
