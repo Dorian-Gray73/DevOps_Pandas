@@ -221,8 +221,8 @@ public class DataFrame {
      * @throws IllegalArgumentException si la colonne n'existe pas
      * @throws IllegalArgumentException si la colonne n'est pas de type numérique
      */
-    public double premierQuartile(String string) throws IllegalArgumentException {
-        int i = labels.indexOf(string);
+    public double premierQuartile(String nom) throws IllegalArgumentException {
+        int i = labels.indexOf(nom);
         if (i == -1) {
             throw new IllegalArgumentException("La colonne n'existe pas");
         }
@@ -249,8 +249,8 @@ public class DataFrame {
  * @throws IllegalArgumentException si la colonne n'existe pas
  * @throws IllegalArgumentException si la colonne n'est pas de type numérique
  */
-    public double troisiemeQuartile(String string) throws IllegalArgumentException {
-        int i = labels.indexOf(string);
+    public double troisiemeQuartile(String nom) throws IllegalArgumentException {
+        int i = labels.indexOf(nom);
         if (i == -1) {
             throw new IllegalArgumentException("La colonne n'existe pas");
         }
@@ -270,6 +270,26 @@ public class DataFrame {
         }
     }
 
+    //distance inter-quartile
+    /**
+     * Fonction qui retourne la distance inter-quartile d'une colonne d'un dataframe
+     * @param string : nom de la colonne
+     * @return la distance inter-quartile d'une colonne d'un dataframe
+     * @throws IllegalArgumentException si la colonne n'existe pas
+     * @throws IllegalArgumentException si la colonne n'est pas de type numérique
+     */
+    public double distanceInterQuartile(String nom) throws IllegalArgumentException {
+        int i = labels.indexOf(nom);
+        if (i == -1) {
+            throw new IllegalArgumentException("La colonne n'existe pas");
+        }
+        if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
+            throw new IllegalArgumentException("La colonne n'est pas de type numérique");
+        }
+        double premierQuartile = premierQuartile(nom);
+        double troisiemeQuartile = troisiemeQuartile(nom);
+        return troisiemeQuartile - premierQuartile ;
+    }
 
 
 
