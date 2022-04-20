@@ -8,7 +8,6 @@ public class DataFrame {
     private Integer nbLigne = 0;
 
 
-
     /**
      * 
      * Génére un DataFrame en prenant une table de String et une table de données
@@ -106,6 +105,31 @@ public class DataFrame {
     */
     public String toString() {
         return head(Integer.MAX_VALUE);
+    }
+    /**
+     * Fonction qui retourne la moyenne d'une colonne d'un dataframe
+    * @param string : nom de la colonne
+    * @exception IllegalArgumentException si la colonne n'existe pas
+    * @exception IllegalArgumentException si la colonne n'est pas un nombre
+    * @return la moyenne d'une colonne d'un dataframe
+    */
+    public int moyenne(String string) throws IllegalArgumentException {
+        int i = labels.indexOf(string);
+        if (i == -1) {
+            throw new IllegalArgumentException("La colonne n'existe pas");
+        }
+
+        if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
+            throw new IllegalArgumentException("La colonne n'est pas de type numérique");
+        } 
+
+        int sum = 0;
+        int nb = 0;
+        for (int j = 0; j < dataframe.get(i).size(); j++) {
+            sum += (int) dataframe.get(i).get(j);
+            nb++;
+        }
+        return sum / nb;
     }
 
 }
