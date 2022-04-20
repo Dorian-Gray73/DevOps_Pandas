@@ -242,7 +242,42 @@ public class DataFrame {
         }
     }
 
+/**
+ * Fonction qui retourne le troisième quartile d'une colonne d'un dataframe
+ * @param string : nom de la colonne
+ * @return le troisième quartile d'une colonne d'un dataframe
+ * @throws IllegalArgumentException si la colonne n'existe pas
+ * @throws IllegalArgumentException si la colonne n'est pas de type numérique
+ */
+    public double troisiemeQuartile(String string) throws IllegalArgumentException {
+        int i = labels.indexOf(string);
+        if (i == -1) {
+            throw new IllegalArgumentException("La colonne n'existe pas");
+        }
+        if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
+            throw new IllegalArgumentException("La colonne n'est pas de type numérique");
+        }
+        ArrayList<Double> ligne = convertToDouble(dataframe.get(i));
+        double[] tab = new double[ligne.size()];
+        for (int j = 0; j < ligne.size(); j++) {
+            tab[j] = (double)ligne.get(j);
+        }
+        Arrays.sort(tab);
+        if (tab.length % 2 == 0) {
+            return (tab[tab.length * 3 / 4] + tab[tab.length * 3 / 4 - 1]) / 2;
+        } else {
+            return tab[tab.length * 3 / 4];
+        }
+    }
 
+
+
+
+    /**
+     * Fonction qui retourne le troisième quartile d'une colonne d'un dataframe
+     * @param string : nom de la colonne
+     * @return le troisième quartile d'une colonne d'un dataframe
+     */
     private ArrayList<Double> convertToDouble(ArrayList<?> list) {
         ArrayList<Double> listDouble = new ArrayList<>();
         switch (list.get(0).getClass().getName()) {

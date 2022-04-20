@@ -425,6 +425,26 @@ public class DataFrameTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void TestTroisiemeQuartile(){
+            ArrayList<String> labels = new ArrayList<String>();
+            labels.add("col1");
+            ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+            ArrayList<Integer> colonne1 = new ArrayList<Integer>();
+            colonne1.add(1);
+            colonne1.add(2);
+            colonne1.add(3);
+            colonne1.add(4);
+            data.add(colonne1);
+            DataFrame df;
+        try {
+            df = new DataFrame(labels, data);
+            assertEquals("Nombre de colonne : ", 1, df.nbColonne());
+            assertEquals("Troisieme quartile : ", 3.5, df.troisiemeQuartile("col1"),0.001);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
