@@ -157,6 +157,31 @@ public class DataFrame {
         }
         return max;
     }
-    
+
+    /**
+     * Fonction qui retourne le min d'une colonne d'un dataframe
+     * @param string : nom de la colonne
+     * @exception IllegalArgumentException si la colonne n'existe pas
+     * @exception IllegalArgumentException si la colonne n'est pas de type numérique
+     * @return le min d'une colonne d'un dataframe
+     */
+    public int min(String string) throws IllegalArgumentException {
+        int i = labels.indexOf(string);
+        if (i == -1) {
+            throw new IllegalArgumentException("La colonne n'existe pas");
+        }
+
+        if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
+            throw new IllegalArgumentException("La colonne n'est pas de type numérique");
+        }
+
+        int min = (int) dataframe.get(i).get(0);
+        for (int j = 0; j < dataframe.get(i).size(); j++) {
+            if ((int) dataframe.get(i).get(j) < min) {
+                min = (int) dataframe.get(i).get(j);
+            }
+        }
+        return min;
+    }
 
 }
