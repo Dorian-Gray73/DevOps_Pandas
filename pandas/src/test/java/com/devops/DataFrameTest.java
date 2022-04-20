@@ -329,4 +329,30 @@ public class DataFrameTest {
         }
     }
 
+    @Test
+    public void TestMax(){
+            ArrayList<String> labels = new ArrayList<String>();
+            labels.add("col1");
+            labels.add("col2");
+            ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+            ArrayList<Integer> colonne1 = new ArrayList<Integer>();
+            colonne1.add(1);
+            colonne1.add(2);
+            colonne1.add(3);
+            data.add(colonne1);
+            ArrayList<Integer> colonne2 = new ArrayList<Integer>();
+            colonne2.add(4);
+            colonne2.add(5);
+            colonne2.add(6);
+            data.add(colonne2);
+        DataFrame df;
+        try {
+            df = new DataFrame(labels, data);
+            assertEquals("Nombre de colonne : ", 2, df.nbColonne());
+            assertSame("Max : ",6, df.max("col2"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

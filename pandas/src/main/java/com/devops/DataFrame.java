@@ -132,4 +132,31 @@ public class DataFrame {
         return sum / nb;
     }
 
+    /**
+    * Fonction qui retourne la moyenne d'une colonne d'un dataframe
+    * @param string : nom de la colonne
+    * @exception IllegalArgumentException si la colonne n'existe pas
+    * @exception IllegalArgumentException si la colonne n'est pas de type numérique
+    * @return la moyenne d'une colonne d'un dataframe
+    */
+    public int max(String string) throws IllegalArgumentException {
+        int i = labels.indexOf(string);
+        if (i == -1) {
+            throw new IllegalArgumentException("La colonne n'existe pas");
+        }
+
+        if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
+            throw new IllegalArgumentException("La colonne n'est pas de type numérique");
+        }
+
+        int max = (int) dataframe.get(i).get(0);
+        for (int j = 0; j < dataframe.get(i).size(); j++) {
+            if ((int) dataframe.get(i).get(j) > max) {
+                max = (int) dataframe.get(i).get(j);
+            }
+        }
+        return max;
+    }
+    
+
 }
