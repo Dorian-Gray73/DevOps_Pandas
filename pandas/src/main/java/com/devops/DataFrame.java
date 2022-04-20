@@ -207,9 +207,41 @@ public class DataFrame {
             tab[j] = (double)ligne.get(j);
         }
         Arrays.sort(tab);
-        double mediane = tab[tab.length / 2];
-        return mediane;
+        if (tab.length % 2 == 0) {
+            return (tab[tab.length / 2] + tab[tab.length / 2 - 1]) / 2;
+        } else {
+            return tab[tab.length / 2];
+        }
     }
+
+    /**
+     * Fonction qui retourne le premier quartile d'une colonne d'un dataframe
+     * @param string : nom de la colonne
+     * @return le premier quartile d'une colonne d'un dataframe
+     * @throws IllegalArgumentException si la colonne n'existe pas
+     * @throws IllegalArgumentException si la colonne n'est pas de type numérique
+     */
+    public double premierQuartile(String string) throws IllegalArgumentException {
+        int i = labels.indexOf(string);
+        if (i == -1) {
+            throw new IllegalArgumentException("La colonne n'existe pas");
+        }
+        if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
+            throw new IllegalArgumentException("La colonne n'est pas de type numérique");
+        }
+        ArrayList<Double> ligne = convertToDouble(dataframe.get(i));
+        double[] tab = new double[ligne.size()];
+        for (int j = 0; j < ligne.size(); j++) {
+            tab[j] = (double)ligne.get(j);
+        }
+        Arrays.sort(tab);
+        if (tab.length % 2 == 0) {
+            return (tab[tab.length / 4] + tab[tab.length / 4 - 1]) / 2;
+        } else {
+            return tab[tab.length / 4];
+        }
+    }
+
 
     private ArrayList<Double> convertToDouble(ArrayList<?> list) {
         ArrayList<Double> listDouble = new ArrayList<>();

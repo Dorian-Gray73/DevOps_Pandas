@@ -392,12 +392,35 @@ public class DataFrameTest {
             colonne1.add(1.0f);
             colonne1.add(2.0f);
             colonne1.add(3.0f);
+            colonne1.add(4.0f);
             data.add(colonne1);
             DataFrame df;
         try {
             df = new DataFrame(labels, data);
             assertEquals("Nombre de colonne : ", 1, df.nbColonne());
-            assertEquals("Mediane : ", 2.0, df.mediane("col1"),0.001);
+            assertEquals("Mediane : ", 2.5, df.mediane("col1"),0.001);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //test premier quartile
+    @Test
+    public void TestPremierQuartile(){
+            ArrayList<String> labels = new ArrayList<String>();
+            labels.add("col1");
+            ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+            ArrayList<Float> colonne1 = new ArrayList<Float>();
+            colonne1.add(1.0f);
+            colonne1.add(2.0f);
+            colonne1.add(3.0f);
+            colonne1.add(4.0f);
+            data.add(colonne1);
+            DataFrame df;
+        try {
+            df = new DataFrame(labels, data);
+            assertEquals("Nombre de colonne : ", 1, df.nbColonne());
+            assertEquals("Premier quartile : ", 1.5, df.premierQuartile("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
         }
