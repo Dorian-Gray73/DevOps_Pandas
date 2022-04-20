@@ -323,7 +323,9 @@ public class DataFrameTest {
         try {
             df = new DataFrame(labels, data);
             assertEquals("Nombre de colonne : ", 2, df.nbColonne());
-            assertSame("Moyenne : ", 2, df.moyenne("col1"));
+            System.out.println(df.moyenne("col1"));
+            double res = 2.0;
+            assertEquals("Moyenne : ",res, df.moyenne("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -349,7 +351,7 @@ public class DataFrameTest {
         try {
             df = new DataFrame(labels, data);
             assertEquals("Nombre de colonne : ", 2, df.nbColonne());
-            assertSame("Max : ",6, df.max("col2"));
+            assertEquals("Max : ",6.0, df.max("col2"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -375,10 +377,32 @@ public class DataFrameTest {
         try {
             df = new DataFrame(labels, data);
             assertEquals("Nombre de colonne : ", 2, df.nbColonne());
-            assertSame("Min : ",1, df.min("col1"));
+            assertEquals("Min : ",1.0, df.min("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void TestMediane(){
+            ArrayList<String> labels = new ArrayList<String>();
+            labels.add("col1");
+            ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+            ArrayList<Float> colonne1 = new ArrayList<Float>();
+            colonne1.add(1.0f);
+            colonne1.add(2.0f);
+            colonne1.add(3.0f);
+            data.add(colonne1);
+            DataFrame df;
+        try {
+            df = new DataFrame(labels, data);
+            assertEquals("Nombre de colonne : ", 1, df.nbColonne());
+            assertEquals("Mediane : ", 2.0, df.mediane("col1"),0.001);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

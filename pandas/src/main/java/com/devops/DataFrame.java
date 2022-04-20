@@ -1,6 +1,7 @@
 package com.devops;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DataFrame {
     ArrayList<String> labels;
@@ -113,7 +114,7 @@ public class DataFrame {
     * @exception IllegalArgumentException si la colonne n'est pas un nombre
     * @return la moyenne d'une colonne d'un dataframe
     */
-    public int moyenne(String string) throws IllegalArgumentException {
+    public double moyenne(String string) throws IllegalArgumentException {
         int i = labels.indexOf(string);
         if (i == -1) {
             throw new IllegalArgumentException("La colonne n'existe pas");
@@ -122,11 +123,11 @@ public class DataFrame {
         if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
             throw new IllegalArgumentException("La colonne n'est pas de type numérique");
         } 
-
-        int sum = 0;
+        ArrayList<?> ligne = convertToDouble(dataframe.get(i));
+        double sum = 0;
         int nb = 0;
-        for (int j = 0; j < dataframe.get(i).size(); j++) {
-            sum += (int) dataframe.get(i).get(j);
+        for (int j = 0; j < ligne.size(); j++) {
+            sum += (Double) ligne.get(j);
             nb++;
         }
         return sum / nb;
@@ -139,7 +140,7 @@ public class DataFrame {
     * @exception IllegalArgumentException si la colonne n'est pas de type numérique
     * @return la moyenne d'une colonne d'un dataframe
     */
-    public int max(String string) throws IllegalArgumentException {
+    public double max(String string) throws IllegalArgumentException {
         int i = labels.indexOf(string);
         if (i == -1) {
             throw new IllegalArgumentException("La colonne n'existe pas");
@@ -148,11 +149,12 @@ public class DataFrame {
         if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
             throw new IllegalArgumentException("La colonne n'est pas de type numérique");
         }
+        ArrayList<Double> ligne = convertToDouble(dataframe.get(i));
 
-        int max = (int) dataframe.get(i).get(0);
-        for (int j = 0; j < dataframe.get(i).size(); j++) {
-            if ((int) dataframe.get(i).get(j) > max) {
-                max = (int) dataframe.get(i).get(j);
+        double max = (double) ligne.get(0);
+        for (int j = 0; j < ligne.size(); j++) {
+            if ((double)ligne.get(j) > max) {
+                max = (double) ligne.get(j);
             }
         }
         return max;
@@ -165,7 +167,7 @@ public class DataFrame {
      * @exception IllegalArgumentException si la colonne n'est pas de type numérique
      * @return le min d'une colonne d'un dataframe
      */
-    public int min(String string) throws IllegalArgumentException {
+    public double min(String string) throws IllegalArgumentException {
         int i = labels.indexOf(string);
         if (i == -1) {
             throw new IllegalArgumentException("La colonne n'existe pas");
@@ -174,14 +176,64 @@ public class DataFrame {
         if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
             throw new IllegalArgumentException("La colonne n'est pas de type numérique");
         }
-
-        int min = (int) dataframe.get(i).get(0);
-        for (int j = 0; j < dataframe.get(i).size(); j++) {
-            if ((int) dataframe.get(i).get(j) < min) {
-                min = (int) dataframe.get(i).get(j);
+        ArrayList<Double> ligne = convertToDouble(dataframe.get(i));
+        double min = (double) ligne.get(0);
+        for (int j = 0; j < ligne.size(); j++) {
+            if ((double) ligne.get(j) < min) {
+                min = (double) ligne.get(j);
             }
         }
         return min;
     }
+
+    /**
+     * Fonction qui retourne la mediane d'une colonne d'un dataframe
+     * @param string : nom de la colonne
+     * @exception IllegalArgumentException si la colonne n'existe pas
+     * @exception IllegalArgumentException si la colonne n'est pas de type numérique
+     * @return la mediane d'une colonne d'un dataframe
+     */
+    public double mediane(String string) throws IllegalArgumentException {
+        int i = labels.indexOf(string);
+        if (i == -1) {
+            throw new IllegalArgumentException("La colonne n'existe pas");
+        }
+        if (!(dataframe.get(i).get(0) instanceof Integer || dataframe.get(i).get(0) instanceof Float) || dataframe.get(i).get(0) instanceof Double) {
+            throw new IllegalArgumentException("La colonne n'est pas de type numérique");
+        }
+        ArrayList<Double> ligne = convertToDouble(dataframe.get(i));
+        double[] tab = new double[ligne.size()];
+        for (int j = 0; j < ligne.size(); j++) {
+            tab[j] = (double)ligne.get(j);
+        }
+        Arrays.sort(tab);
+        double mediane = tab[tab.length / 2];
+        return mediane;
+    }
+
+    private ArrayList<Double> convertToDouble(ArrayList<?> list) {
+        ArrayList<Double> listDouble = new ArrayList<>();
+        switch (list.get(0).getClass().getName()) {
+            case "java.lang.Integer":
+                for (int i = 0; i < list.size(); i++) {
+                    listDouble.add(((Integer) list.get(i)).doubleValue());
+                }
+                break;
+            case "java.lang.Float":
+                for (int i = 0; i < list.size(); i++) {
+                    listDouble.add(((Float) list.get(i)).doubleValue());
+                }
+                break;
+            case "java.lang.Double":
+                for (int i = 0; i < list.size(); i++) {
+                    listDouble.add((Double) list.get(i));
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("La colonne n'est pas de type numérique");
+        }
+        return listDouble;
+    }
+
 
 }
