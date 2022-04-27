@@ -71,3 +71,6 @@ jobs:
         gh pr comment ${{github.event.pull_request.number}} -b "${BODY}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
