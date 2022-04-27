@@ -37,10 +37,10 @@ public class DataFrameTest {
             colonne1.add(2);
             colonne1.add(3);
             data.add(colonne1);
-            ArrayList<Integer> colonne2 = new ArrayList<Integer>();
-            colonne2.add(4);
-            colonne2.add(5);
-            colonne2.add(6);
+            ArrayList<String> colonne2 = new ArrayList<String>();
+            colonne2.add("4");
+            colonne2.add("5");
+            colonne2.add("6");
             data.add(colonne2);
             ArrayList<Integer> colonne3 = new ArrayList<Integer>();
             colonne3.add(7);
@@ -328,6 +328,28 @@ public class DataFrameTest {
             assertEquals("Moyenne : ",res, df.moyenne("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
+    public void TestLabelSelection(){
+        String[] nomLabels = {"col1", "col2", "col3"};
+        ArrayList<String> labels = createArrayList(nomLabels);
+        ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+        Integer[] col1 = {1, 2, 3};
+        ArrayList<Integer> colonne1 = createArrayList(col1);
+        Integer[] col2 = {4, 5, 6};
+        ArrayList<Integer> colonne2 = createArrayList(col2);
+        Integer[] col3 = {7, 8, 9};
+        ArrayList<Integer> colonne3 = createArrayList(col3);
+        data.add(colonne1);
+        data.add(colonne2);
+        data.add(colonne3);
+        DataFrame df, df2;
+        try {
+            df = new DataFrame(labels, data);
+            df2 = df.labelSelection("col2");
+            assertEquals("Nombre de colonne : ",1, df2.nbColonne());
+            assertEquals("Obtenir le DataFrame","col2\t\n4\t\n5\t\n6\t\n", df2.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Problème dans le test.");
         }
     }
 
@@ -380,6 +402,29 @@ public class DataFrameTest {
             assertEquals("Min : ",1.0, df.min("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
+    public void TestLabelsSelection(){
+        String[] nomLabels = {"col1", "col2", "col3"};
+        ArrayList<String> labels = createArrayList(nomLabels);
+        ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+        Integer[] col1 = {1, 2, 3};
+        ArrayList<Integer> colonne1 = createArrayList(col1);
+        Integer[] col2 = {4, 5, 6};
+        ArrayList<Integer> colonne2 = createArrayList(col2);
+        Integer[] col3 = {7, 8, 9};
+        ArrayList<Integer> colonne3 = createArrayList(col3);
+        data.add(colonne1);
+        data.add(colonne2);
+        data.add(colonne3);
+        DataFrame df, df2;
+        try {
+            df = new DataFrame(labels, data);
+            nomLabels = new String[]{"col2", "col3"};
+            df2 = df.labelSelection(nomLabels);
+            assertEquals("Nombre de colonne : ", 2, df2.nbColonne());
+            assertEquals("Obtenir le DataFrame","col2\tcol3\t\n4\t7\t\n5\t8\t\n6\t9\t\n", df2.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Problème dans le test.");
         }
     }
 
@@ -465,6 +510,82 @@ public class DataFrameTest {
             assertEquals("Interquartile range : ",2.0, df.distanceInterQuartile("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
+    public void TestLabelsSelectionCopy(){
+        String[] nomLabels = {"col1", "col2", "col3"};
+        ArrayList<String> labels = createArrayList(nomLabels);
+        ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+        Integer[] col1 = {1, 2, 3};
+        ArrayList<Integer> colonne1 = createArrayList(col1);
+        Integer[] col2 = {4, 5, 6};
+        ArrayList<Integer> colonne2 = createArrayList(col2);
+        Integer[] col3 = {7, 8, 9};
+        ArrayList<Integer> colonne3 = createArrayList(col3);
+        data.add(colonne1);
+        data.add(colonne2);
+        data.add(colonne3);
+        DataFrame df, df2;
+        try {
+            df = new DataFrame(labels, data);
+            nomLabels = new String[]{"col1", "col2", "col3"};
+            df2 = df.labelSelection(nomLabels);
+            assertEquals("Nombre de colonne : ", 3, df2.nbColonne());
+            assertEquals("Obtenir le DataFrame","col1\tcol2\tcol3\t\n1\t4\t7\t\n2\t5\t8\t\n3\t6\t9\t\n", df2.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Problème dans le test.");
+        }
+    }
+
+    @Test
+    public void TestIndexSelection(){
+        String[] nomLabels = {"col1", "col2", "col3"};
+        ArrayList<String> labels = createArrayList(nomLabels);
+        ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+        Integer[] col1 = {1, 2, 3};
+        ArrayList<Integer> colonne1 = createArrayList(col1);
+        Integer[] col2 = {4, 5, 6};
+        ArrayList<Integer> colonne2 = createArrayList(col2);
+        Integer[] col3 = {7, 8, 9};
+        ArrayList<Integer> colonne3 = createArrayList(col3);
+        data.add(colonne1);
+        data.add(colonne2);
+        data.add(colonne3);
+        DataFrame df, df2;
+        try {
+            df = new DataFrame(labels, data);
+            df2 = df.ligneIndexSelection(1);
+            assertEquals("Nombre de colonne : ", 3, df2.nbColonne());
+            assertEquals("Obtenir le DataFrame","col1\tcol2\tcol3\t\n1\t4\t7\t\n", df2.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Problème dans le test.");
+        }
+    }
+
+    @Test
+    public void TestIndexsSelection(){
+        String[] nomLabels = {"col1", "col2", "col3"};
+        ArrayList<String> labels = createArrayList(nomLabels);
+        ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+        Integer[] col1 = {1, 2, 3};
+        ArrayList<Integer> colonne1 = createArrayList(col1);
+        Integer[] col2 = {4, 5, 6};
+        ArrayList<Integer> colonne2 = createArrayList(col2);
+        Integer[] col3 = {7, 8, 9};
+        ArrayList<Integer> colonne3 = createArrayList(col3);
+        data.add(colonne1);
+        data.add(colonne2);
+        data.add(colonne3);
+        DataFrame df, df2;
+        try {
+            df = new DataFrame(labels, data);
+            Integer[] indexs = {1, 3};
+            df2 = df.ligneIndexSelection(indexs);
+            assertEquals("Nombre de colonne : ", 3, df2.nbColonne());
+            assertEquals("Obtenir le DataFrame","col1\tcol2\tcol3\t\n1\t4\t7\t\n3\t6\t9\t\n", df2.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Problème dans le test.");
         }
     }
 
