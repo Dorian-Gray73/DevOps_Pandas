@@ -328,6 +328,9 @@ public class DataFrameTest {
             assertEquals("Moyenne : ",res, df.moyenne("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
     public void TestLabelSelection(){
         String[] nomLabels = {"col1", "col2", "col3"};
         ArrayList<String> labels = createArrayList(nomLabels);
@@ -402,6 +405,9 @@ public class DataFrameTest {
             assertEquals("Min : ",1.0, df.min("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
     public void TestLabelsSelection(){
         String[] nomLabels = {"col1", "col2", "col3"};
         ArrayList<String> labels = createArrayList(nomLabels);
@@ -510,6 +516,9 @@ public class DataFrameTest {
             assertEquals("Interquartile range : ",2.0, df.distanceInterQuartile("col1"),0.001);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    
     public void TestLabelsSelectionCopy(){
         String[] nomLabels = {"col1", "col2", "col3"};
         ArrayList<String> labels = createArrayList(nomLabels);
